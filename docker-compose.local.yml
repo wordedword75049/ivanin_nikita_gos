@@ -1,0 +1,25 @@
+#
+# Нужен для запуска СТЕКА приложения локально
+#
+
+version: "3.2"
+
+# см. https://docs.docker.com/compose/compose-file/compose-file-v3/
+
+services:
+  backend:
+#    network_mode: "host"
+    build: backend
+    command: backend
+    restart: on-failure
+    ports:
+      - 5000:5000
+
+  frontend:
+    #network_mode: "host"
+    build: frontend
+    command: frontend
+    depends_on:
+      - backend
+    ports:
+      - 8080:8080
